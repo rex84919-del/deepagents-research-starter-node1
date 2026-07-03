@@ -1,10 +1,29 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
-import mermaid from "mermaid";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-mermaid.initialize({ startOnLoad: true, theme: "default" });
+let mermaidLoadPromise: Promise<any> | null = null;
+
+function loadMermaid(): Promise<any> {
+  if (mermaidLoadPromise) return mermaidLoadPromise;
+  if ((window as any).mermaid) {
+    mermaidLoadPromise = Promise.resolve((window as any).mermaid);
+    return mermaidLoadPromise;
+  }
+  mermaidLoadPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+    script.onload = () => {
+      const m = (window as any).mermaid;
+      m.initialize({ startOnLoad: false, theme: "default" });
+      resolve(m);
+    };
+    script.onerror = () => reject(new Error("Failed to load mermaid"));
+    document.head.appendChild(script);
+  });
+  return mermaidLoadPromise;
+}
 
 /**
  * Normalize streaming markdown:
@@ -19,24 +38,28 @@ function normalizeMarkdown(raw: string): string {
 
 function MermaidCodeBlock({ code }: { code: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const idRef = useRef(`mermaid-${Math.random().toString(36).slice(2, 9)}`);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    const renderDiagram = async () => {
-      try {
-        const { svg } = await mermaid.render(idRef.current, code);
-        if (containerRef.current) {
+    let cancelled = false;
+    const id = `mermaid-${Math.random().toString(36).slice(2, 9)}`;
+    loadMermaid()
+      .then(async (m) => {
+        if (cancelled) return;
+        const { svg } = await m.render(id, code);
+        if (!cancelled && containerRef.current) {
           containerRef.current.innerHTML = svg;
         }
-      } catch (err) {
-        if (containerRef.current) {
-          containerRef.current.innerHTML = `<pre style="color:red;">Mermaid render error: ${String(err)}</pre>`;
-        }
-      }
-    };
-    renderDiagram();
+      })
+      .catch((err) => {
+        if (!cancelled) setError(String(err));
+      });
+    return () => { cancelled = true; };
   }, [code]);
+
+  if (error) {
+    return <pre style={{ color: "red" }}>Mermaid render error: {error}</pre>;
+  }
 
   return (
     <div
