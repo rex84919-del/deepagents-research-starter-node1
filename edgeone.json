@@ -2,10 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "agents": {
-    "framework": "deepagents",
-    "timeout": 300,
-    "sandbox": {
-      "timeout": 300
-    }
+    "framework": "deepagents"
   }
 }
