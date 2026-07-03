@@ -14,17 +14,30 @@ interface WelcomeScreenProps {
 }
 
 const cardIcons = [
-  <svg key="search" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+  // DNA helix icon
+  <svg key="dna" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M7 2c0 4 5 6 5 10s-5 6-5 10M17 2c0 4-5 6-5 10s5 6 5 10M3 7h6M15 7h6M3 17h6M15 17h6" />
   </svg>,
-  <svg key="rocket" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+  // Protein structure (molecule) icon
+  <svg key="protein" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <circle cx="6" cy="6" r="2.5" />
+    <circle cx="18" cy="8" r="2.5" />
+    <circle cx="10" cy="18" r="2.5" />
+    <circle cx="20" cy="18" r="2" />
+    <path strokeLinecap="round" d="M6 6L18 8M18 8L10 18M10 18L20 18M6 6L10 18" />
   </svg>,
-  <svg key="bolt" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+  // Microscope icon
+  <svg key="microscope" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 3v6m0 0a3 3 0 106 0M9 9a3 3 0 01-3 3m3-3L5 15m0 0H4a1 1 0 00-1 1v2h18v-2a1 1 0 00-1-1h-1m-4-4l2 6m0 0H7" />
   </svg>,
-  <svg key="database" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+  // Molecular bond icon
+  <svg key="bond" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <circle cx="12" cy="12" r="3" />
+    <circle cx="4" cy="12" r="2" />
+    <circle cx="20" cy="12" r="2" />
+    <circle cx="12" cy="4" r="2" />
+    <circle cx="12" cy="20" r="2" />
+    <path strokeLinecap="round" d="M4 12h5M15 12h5M12 4v5M12 15v5" />
   </svg>,
 ];
 

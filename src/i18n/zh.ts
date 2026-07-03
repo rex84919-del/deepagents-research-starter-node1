@@ -1,16 +1,16 @@
 import type { Translations } from "./types";
 
 export const zh: Translations = {
-  appTitle: "Deep Research",
-  appSubtitle: "AI 专家研究助手",
+  appTitle: "药物靶点发现",
+  appSubtitle: "AI驱动的药物靶点研究代理",
 
-  welcomeTitle: "你想研究什么？",
-  welcomeSubtitle: "提出一个问题，专家研究团队将为你搜索、分析并汇总答案。",
+  welcomeTitle: "发现新型药物靶点",
+  welcomeSubtitle: "研究蛋白质结构、从头设计方法和缺乏药物治疗疾病的治疗机会。",
   presetQuestions: [
-    "最近科技圈有什么新闻？",
-    "世界上最受欢迎的编程语言有哪些？",
-    "React 和 Vue.js 各有什么优劣势？",
-    "PostgreSQL、MySQL 和 MongoDB 怎么选？",
+    "汉坦病毒有哪些潜在药物靶点？",
+    "在PDB中查找新发病原体的蛋白质结构",
+    "Baker Lab的RFdiffusion如何实现蛋白质从头设计？",
+    "识别当前无药物的孤儿病治疗靶点",
   ],
 
   inputPlaceholder: "输入你想研究的问题…",
@@ -19,22 +19,22 @@ export const zh: Translations = {
   newChatButton: "返回首页",
 
   phaseIdle: "就绪",
-  phasePlanning: "分析问题中",
-  phaseResearching: "研究中",
-  phaseSynthesizing: "汇总结论中",
-  phaseComplete: "研究完成",
+  phasePlanning: "分析靶点中",
+  phaseResearching: "研究靶点中",
+  phaseSynthesizing: "汇总发现中",
+  phaseComplete: "靶点发现完成",
 
-  specialistAgents: "研究员",
+  specialistAgents: "靶点研究员",
   completed: "已完成",
-  taskPending: "正在准备研究…",
-  taskSummarizing: "研究完成，正在整理结论…",
+  taskPending: "正在准备靶点研究…",
+  taskSummarizing: "靶点研究完成，正在整理结论…",
   taskCancelled: "已取消",
-  noContentYet: "等待研究结果…",
-  synthesizingResults: "正在汇总研究结论…",
-  researchStopped: "研究已停止",
+  noContentYet: "等待靶点研究结果…",
+  synthesizingResults: "正在汇总靶点发现结论…",
+  researchStopped: "靶点发现已停止",
 
   you: "你",
-  coordinator: "首席研究员",
+  coordinator: "靶点发现主管",
 
   recentConversations: "近期会话",
   loadingHistory: "加载会话中...",
