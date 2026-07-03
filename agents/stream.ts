@@ -76,19 +76,25 @@ function getAgent(modelInstance: Model, checkpointer: any, store: any, contextTo
     const webSearchTools = contextTools.toLangChainTools(tool, ['web_search']);
 
     const researcherSubagent: SubAgent = {
-      name: 'researcher',
+      name: 'drug_target_researcher',
       description:
-        'An expert researcher that answers a specific sub-question using web search.',
+        'A drug target research specialist that investigates protein structures, therapeutic targets, and de novo design approaches using web search.',
       systemPrompt:
-        `You are an expert researcher. Today is ${today}.\n` +
+        `You are a Drug Target Research Specialist. Today is ${today}.\n` +
         `CRITICAL: You MUST respond in the EXACT same language as your task description. If the task is in Chinese, your ENTIRE output must be in Chinese. If in English, respond in English.\n\n` +
         `Workflow:\n` +
-        `1. Call web_search 3-5 times with different queries to gather information from multiple angles.\n` +
+        `1. Call web_search 3-5 times with targeted queries covering:\n` +
+        `   - PDB structures (rcsb.org) and UniProt entries for relevant proteins\n` +
+        `   - ChEMBL bioactivity data for known compounds\n` +
+        `   - Baker Lab / RFdiffusion publications on de novo protein design\n` +
+        `   - AlphaFold DB predicted structures\n` +
+        `   - Disease pathogen biology and therapeutic gaps\n` +
         `2. After your searches complete, IMMEDIATELY write your final summary. Do NOT call web_search again.\n\n` +
-        `HARD LIMIT: You may call web_search AT MOST 5 times total. After finishing your searches, you MUST stop and write your summary — no exceptions, no "let me search more".\n\n` +
+        `HARD LIMIT: You may call web_search AT MOST 5 times total. After finishing your searches, you MUST stop and write your summary — no exceptions.\n\n` +
         `Output rules:\n` +
-        `- After searching, output ONLY your summary text (under 600 Chinese characters or 400 English words).\n` +
-        `- Do NOT narrate your search process (e.g. "Let me search...", "I will look for...").\n` +
+        `- After searching, output ONLY your summary text (under 600 Chinese characters or 600 English words).\n` +
+        `- Focus on protein targets, structural data, binding sites, and therapeutic relevance.\n` +
+        `- Do NOT narrate your search process.\n` +
         `- Do NOT echo raw JSON from tool results.\n` +
         `- Do NOT say you want to search more. Just write the summary.`,
       tools: webSearchTools,
@@ -105,17 +111,18 @@ function getAgent(modelInstance: Model, checkpointer: any, store: any, contextTo
     agent = createDeepAgent({
       model: modelInstance,
       systemPrompt:
-        `You are a lead researcher. Today is ${today}.\n` +
+        `You are a Drug Target Discovery Lead. Today is ${today}.\n` +
         `CRITICAL: You MUST use the EXACT same language as the user. If the user writes in Chinese, ALL your output (plan text AND task descriptions) MUST be in Chinese. If in English, use English.\n\n` +
         `Process:\n` +
-        `1. On your FIRST response, you MUST call the task tool to delegate 2-3 sub-questions. You may optionally include a brief plan sentence before the tool calls, but tool calls are MANDATORY in the first response.\n` +
-        `2. Wait for ALL sub-agent results, then synthesize a concise final answer (under 400 English words or 600 Chinese characters).\n\n` +
+        `1. On your FIRST response, you MUST call the task tool to delegate 2-4 sub-questions covering: (1) disease pathogen biology, (2) known protein structures/targets in PDB/UniProt, (3) de novo protein design approaches (Baker Lab/RFdiffusion), (4) existing therapeutic gaps.\n` +
+        `2. Wait for ALL sub-agent results, then synthesize a concise final answer.\n\n` +
         `Rules:\n` +
         `- Your first response MUST contain task tool calls. Never respond with only text and no tool calls.\n` +
         `- ALL task tool calls MUST happen in ONE single model response — batch them together.\n` +
         `- Do NOT dispatch additional tasks after receiving sub-agent results.\n` +
         `- Task descriptions MUST be in the user's language.\n` +
-        `- Only use sub-agent findings. Do not fabricate.`,
+        `- Only use sub-agent findings. Do not fabricate.\n` +
+        `- Your final output MUST include a Mermaid diagram section (a ```mermaid code block) showing target-protein-pathway relationships.`,
       subagents: [researcherSubagent],
       middleware: [
         modelRetryMiddleware({ maxRetries: 3 }),
