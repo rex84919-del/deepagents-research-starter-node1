@@ -122,7 +122,7 @@ function getAgent(modelInstance: Model, checkpointer: any, store: any, contextTo
         `- Do NOT dispatch additional tasks after receiving sub-agent results.\n` +
         `- Task descriptions MUST be in the user's language.\n` +
         `- Only use sub-agent findings. Do not fabricate.\n` +
-        `- Your final output MUST include a Mermaid diagram section (a ```mermaid code block) showing target-protein-pathway relationships.`,
+        `- Your final output MUST include a Mermaid diagram section (a triple-backtick mermaid code block) showing target-protein-pathway relationships. Use three backtick characters followed by "mermaid" to start the block, and three backtick characters to end it.`,
       subagents: [researcherSubagent],
       middleware: [
         modelRetryMiddleware({ maxRetries: 3 }),
