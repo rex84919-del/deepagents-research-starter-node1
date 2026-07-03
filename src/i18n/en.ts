@@ -1,17 +1,17 @@
 import type { Translations } from "./types";
 
 export const en: Translations = {
-  appTitle: "Drug Target Discovery",
-  appSubtitle: "AI-Powered Drug Target Research Agent",
+  appTitle: "Deep Research",
+  appSubtitle: "AI Expert Research Assistant",
 
-  welcomeTitle: "Identify novel drug targets",
+  welcomeTitle: "What would you like to research?",
   welcomeSubtitle:
-    "Research protein structures, de novo design approaches, and therapeutic opportunities for diseases lacking medication.",
+    "Ask a question and a team of expert researchers will search, analyze, and summarize the answer for you.",
   presetQuestions: [
-    "What are potential drug targets for hantavirus?",
-    "Find protein structures in PDB for emerging pathogens",
-    "How does Baker Lab's RFdiffusion approach de novo protein design?",
-    "Identify therapeutic targets for orphan diseases with no current medication",
+    "What's the latest news in the tech world?",
+    "What are the most popular programming languages?",
+    "What are the pros and cons of React vs Vue.js?",
+    "When to use PostgreSQL vs MySQL vs MongoDB?",
   ],
 
   inputPlaceholder: "Enter your research question…",
@@ -20,22 +20,22 @@ export const en: Translations = {
   newChatButton: "Home",
 
   phaseIdle: "Ready",
-  phasePlanning: "Analyzing targets",
-  phaseResearching: "Researching targets",
-  phaseSynthesizing: "Synthesizing findings",
-  phaseComplete: "Target Discovery Complete",
+  phasePlanning: "Analyzing",
+  phaseResearching: "Researching",
+  phaseSynthesizing: "Synthesizing",
+  phaseComplete: "Research Complete",
 
-  specialistAgents: "Target Researchers",
+  specialistAgents: "Researchers",
   completed: "completed",
-  taskPending: "Preparing target research…",
-  taskSummarizing: "Target research done, writing summary…",
+  taskPending: "Preparing research…",
+  taskSummarizing: "Research done, writing summary…",
   taskCancelled: "Cancelled",
-  noContentYet: "Waiting for target research results…",
-  synthesizingResults: "Synthesizing target discovery findings…",
-  researchStopped: "Target discovery stopped",
+  noContentYet: "Waiting for research results…",
+  synthesizingResults: "Synthesizing research findings…",
+  researchStopped: "Research stopped",
 
   you: "You",
-  coordinator: "Target Discovery Lead",
+  coordinator: "Lead Researcher",
 
   recentConversations: "Recent Conversations",
   loadingHistory: "Loading conversation...",
